@@ -1,0 +1,18 @@
+{
+  "type": "mysql",
+  "host": "localhost",
+  "port": 9901,
+  "username": "root",
+  "password": "test",
+  "database": "pube",
+  "synchronize": true,
+  "logging": false,
+  "entities": ["src/entities/**/*.ts"],
+  "migrations": ["src/migrations/**/*.ts"],
+  "subscribers": ["src/subscribers/**/*.ts"],
+  "cli": {
+    "entitiesDir": "src/entities",
+    "migrationsDir": "src/migrations",
+    "subscribersDir": "src/subscribers"
+  }
+}

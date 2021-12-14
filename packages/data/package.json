@@ -1,8 +1,19 @@
 {
   "name": "@pube/data",
   "version": "0.0.0",
+  "main": "dist/index.js",
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
   "dependencies": {
     "@pube/models": "^0.0.0",
     "ttag": "^1.7.24"
+  },
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.1",
+    "@types/node": "^16.11.12",
+    "typescript": "^4.5.4"
   }
 }

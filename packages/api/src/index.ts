@@ -1,24 +1,27 @@
 import "reflect-metadata";
-import {createConnection} from "typeorm";
-import {User} from "./entity/User";
-import {MassGainBase} from '@pube/data';
+import { createConnection } from "typeorm";
+import * as bodyParser from "body-parser";
+import * as express from "express";
+import "express-async-errors";
+import { makeRouter } from "./routers/BaseRouter";
+import { Day, Exercise } from "./entities";
 
-createConnection().then(async connection => {
-    console.log(MassGainBase);
+const PORT = 4000;
 
+createConnection()
+  .then(async (connection) => {
+    console.log("Successfully connected to database");
+    const app = express.default();
 
-    console.log("Inserting a new user into the database...");
-    const user = new User();
-    user.firstName = "Timber";
-    user.lastName = "Saw";
-    user.age = 25;
-    await connection.manager.save(user);
-    console.log("Saved a new user with id: " + user.id);
+    const exerciseRouter = makeRouter<Exercise>(connection, Exercise);
+    const dayRouter = makeRouter<Exercise>(connection, Day);
 
-    console.log("Loading users from the database...");
-    const users = await connection.manager.find(User);
-    console.log("Loaded users: ", users);
+    app.use(bodyParser.json());
+    app.use("/exercise", exerciseRouter);
+    app.use("/day", dayRouter);
 
-    console.log("Here you can setup and run express/koa/any other framework.");
-
-}).catch(error => console.log(error));
+    app.listen(PORT, () => {
+      console.log("Express server listening on port", PORT);
+    });
+  })
+  .catch((error) => console.error(error));
