@@ -1,0 +1,8 @@
+{
+  "name": "@pube/data",
+  "version": "0.0.0",
+  "dependencies": {
+    "@pube/models": "^0.0.0",
+    "ttag": "^1.7.24"
+  }
+}
